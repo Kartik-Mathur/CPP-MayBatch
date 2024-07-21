@@ -1,8 +1,10 @@
 #include <iostream>
 using namespace std;
 
-void spiralPrint(int a[][4], int rows, int cols) {
-	int sr = 0, er = rows - 1, sc = 0, ec = cols - 1;
+void spiralPrint(int a[][4], int rows,
+                 int cols) {
+	int sr = 0, er = rows - 1,
+	    sc = 0, ec = cols - 1;
 
 	while (sr <= er and sc <= ec) {
 		// 1. sr from sc to ec
