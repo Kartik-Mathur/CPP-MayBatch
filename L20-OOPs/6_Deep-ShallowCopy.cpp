@@ -10,25 +10,29 @@ public:
 	char *name;
 	int model;
 	int seats;
+	static int count;
+	const int tyres;
 
 	// 1.DEFAULT CONSTRUCTOR
-	Car() {
-		name = NULL;
+	Car(): tyres(4), name(NULL) {
+		// name = NULL;
 		cout << "Inside Default Constructor\n";
+		count++;
 	}
 
 	// 2.Parameterized Constructor
-	Car(char*a, int p, int m, int s) {
+	Car(char*a, int p, int m, int s): tyres(4), price(p), model(m), seats(s) {
 		cout << "Inside Parameterized Constructor\n";
 		name = new char[strlen(a) + 1];
 		strcpy(name, a);
-		price = p;
-		model = m;
-		seats = s;
+		// price = p;
+		// model = m;
+		// seats = s;
+		count++;
 	}
 
 	// 3. Copy Constructor
-	Car(Car &X) {
+	Car(const Car &X): tyres(4) {
 		cout << "Inside Copy Constructor\n";
 		// name = new char[strlen(X.name) + 1];
 		// strcpy(name, X.name);
@@ -36,10 +40,11 @@ public:
 		price = X.price;
 		model = X.model;
 		seats = X.seats;
+		count++;
 	}
 
 	// Copy Assignment Operator
-	void operator=(Car X) {
+	void operator=(const Car &X) {
 		cout << "Inside Copy Assignment\n";
 		if (name != NULL) { // Agar name kisi valid memory ko point kar raha hai
 			// toh we need to free that memory
@@ -54,6 +59,7 @@ public:
 
 
 	~Car() {
+		count--;
 		cout << "Deleting Object " << name << endl;
 		// delete[]name;
 	}
@@ -86,6 +92,9 @@ public:
 };
 /////////////////////////// BLUEPRINT ////////////////////////////
 
+int Car::count = 0;
+
+
 
 int main() {
 
@@ -105,11 +114,14 @@ int main() {
 	Car D = C;
 
 	D.name[0] = 'T';
+	cout << "Total Cars : " << Car::count << endl;
 
 	A.print();
 	B.print();
 	C.print();
 	D.print();
+	cout << "Total Cars : " << A.count << endl;
+
 
 
 	return 0;
