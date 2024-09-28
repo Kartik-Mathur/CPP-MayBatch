@@ -4,17 +4,18 @@ using namespace std;
 
 class Minheap {
 	vector<int> v;
-
 	void heapify(int i) {
 		int left = 2 * i;
 		int right = left + 1;
 
 		int mi = i; // Lets assume sabse choti value is on index i
-		if (left < v.size() and v[left] < v[mi]) {
+		if (left < v.size() and
+		        v[left] < v[mi]) {
 			mi = left;
 		}
 
-		if (right < v.size() and v[right] < v[mi]) {
+		if (right < v.size()
+		        and v[right] < v[mi]) {
 			mi = right;
 		}
 
@@ -23,18 +24,14 @@ class Minheap {
 			heapify(mi);
 		}
 	}
-
 public:
-
 	Minheap() {
 		v.push_back(-1); // To block the 0th index
 	}
-
 	void push(int d) {
 		v.push_back(d);
 		int c = v.size() - 1;
 		int p = c / 2;
-
 		while (p >= 1 and v[p] > v[c]) {
 			swap(v[p], v[c]);
 			p /= 2;
